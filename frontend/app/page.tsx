@@ -1,9 +1,13 @@
-const Home = () => {
+'use client';
+
+import { ReimbursementsList } from '@/components/ReimbursementsList';
+
+const Admin = () => {
 	return (
 		<div>
-			<p>hello world</p>
+			<ReimbursementsList />
 		</div>
 	);
 };
 
-export default Home;
+export default Admin;
