@@ -1,39 +1,43 @@
-// dummy data
-const reimbursements = [
-	{
-		id: 1,
-		image: 'https://placehold.co/600x400.png',
-		description: 'Taxi fare from airport to hotel',
-		amount: 45.0,
-		checked: false,
-	},
-	{
-		id: 2,
-		image: 'https://placehold.co/600x400.png',
-		description: 'Taxi fare from hotel to conference center',
-		amount: 30.0,
-		checked: true,
-	},
-];
+import { securedREST } from '@/utils/rest';
+import { useEffect, useState } from 'react';
+
+interface Reimbursement {
+	id: string;
+	userId: string;
+	description: string;
+	amount: number;
+	status: Status;
+	receiptUrl: string;
+	adminNote: string | null;
+	reviewedBy: string | null;
+	createdAt: string;
+}
+
+type Status = 'PENDING' | 'APPROVED' | 'REJECTED';
 
 const ReimbursementsList = () => {
-	const handleCheckedChange = (id: number) => {
-		// TODO: call api to update reimbursement status
-		console.log('Checked reimbursement with id:', id);
-	};
+	const [reimbursements, setReimbursements] = useState<Reimbursement[]>([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await securedREST({
+				path: '/api/reimbursements?status=PENDING',
+				method: 'GET',
+			});
+			const data = await response.json();
+			setReimbursements(data);
+		};
+
+		fetchData();
+	}, []);
 
 	return (
 		<div>
 			{reimbursements.map((reimbursement) => (
 				<div key={reimbursement.id} className='mb-4'>
-					<img src={reimbursement.image} alt='Receipt' width='200px' />
+					<img src={reimbursement.receiptUrl} alt='Receipt' width='200px' />
 					<p>Description: {reimbursement.description}</p>
 					<p>Amount: ${reimbursement.amount.toFixed(2)}</p>
-					<input
-						type='checkbox'
-						defaultChecked={reimbursement.checked}
-						onChange={() => handleCheckedChange(reimbursement.id)}
-					/>
 					Approved
 				</div>
 			))}

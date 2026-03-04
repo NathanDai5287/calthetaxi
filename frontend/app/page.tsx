@@ -1,13 +1,12 @@
-'use client';
+import Link from 'next/link';
 
-import { ReimbursementsList } from '@/components/ReimbursementsList';
-
-const Admin = () => {
+const HomePage = () => {
 	return (
 		<div>
-			<ReimbursementsList />
+			<Link href="/login"><button>Login</button></Link>
+			<Link href="/register"><button>Register</button></Link>
 		</div>
 	);
 };
 
-export default Admin;
+export default HomePage;
