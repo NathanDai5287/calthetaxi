@@ -13,7 +13,7 @@ CREATE TABLE reimbursements (
 	description TEXT NOT NULL,
 	amount      DECIMAL(10, 2) NOT NULL,
 	status      VARCHAR(20) DEFAULT 'PENDING' CHECK (status IN ('PENDING', 'APPROVED', 'REJECTED')),
-	receipt_key TEXT,
+	receipt_key TEXT NOT NULL,
 	admin_note  TEXT,
 	reviewed_by UUID REFERENCES users(id),
 	created_at  TIMESTAMP DEFAULT NOW()
