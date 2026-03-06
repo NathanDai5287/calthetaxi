@@ -9,6 +9,9 @@ Pillow
 requests
 python-multipart
 optimum[quanto]
+psycopg2-binary
+boto3
+python-dotenv
 
 # GPU only (uncomment when running on GPU):
 # bitsandbytes

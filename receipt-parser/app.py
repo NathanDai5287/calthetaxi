@@ -10,6 +10,7 @@ from qwen_vl_utils import process_vision_info
 from PIL import Image
 import io
 import datetime
+from transformers import TextStreamer
 
 app = FastAPI()
 
@@ -48,7 +49,8 @@ async def parse_receipt(file: UploadFile = File(...)):
 	print("Starting inference...")
 	start = datetime.datetime.now()
 	with torch.no_grad():
-		generated_ids = model.generate(**inputs, max_new_tokens=50)
+		streamer = TextStreamer(processor.tokenizer, skip_prompt=True, skip_special_tokens=True)
+		generated_ids = model.generate(**inputs, max_new_tokens=50, streamer=streamer)
 	end = datetime.datetime.now()
 	elapsed = end - start
 	print(f"Finished in {(elapsed.seconds + elapsed.microseconds / 1e6):.2f} seconds")
