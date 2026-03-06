@@ -33,25 +33,40 @@ class AuthController(private val authService: AuthService) {
 
 	@PostMapping("/logout")
 	fun logout(response: HttpServletResponse): ResponseEntity<Map<String, String>> {
-		val cookie = jakarta.servlet.http.Cookie("jwt", "").apply {
+		val jwtCookie = jakarta.servlet.http.Cookie("jwt", "").apply {
 			isHttpOnly = true
 			secure = true
 			path = "/"
 			maxAge = 0
 		}
+		response.addCookie(jwtCookie)
 
-		response.addCookie(cookie)
+		val loggedInCookie = jakarta.servlet.http.Cookie("loggedIn", "").apply {
+			isHttpOnly = false
+			secure = true
+			path = "/"
+			maxAge = 0
+		}
 
+		response.addCookie(loggedInCookie)
 		return ResponseEntity.ok(mapOf("message" to "Logged out successfully"))
 	}
 
 	private fun addJwtCookie(response: HttpServletResponse, token: String) {
-		val cookie = jakarta.servlet.http.Cookie("jwt", token).apply {
+		val jwtCookie = jakarta.servlet.http.Cookie("jwt", token).apply {
 			isHttpOnly = true
 			secure = true
 			path = "/"
 			maxAge = 86400 // 24 hours
 		}
-		response.addCookie(cookie)
+		response.addCookie(jwtCookie)
+
+		val loggedInCookie = jakarta.servlet.http.Cookie("loggedIn", "true").apply {
+			isHttpOnly = false
+			secure = true
+			path = "/"
+			maxAge = 86400 // 24 hours
+		}
+		response.addCookie(loggedInCookie)
 	}
 }
