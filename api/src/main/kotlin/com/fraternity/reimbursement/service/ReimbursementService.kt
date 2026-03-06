@@ -2,8 +2,10 @@ package com.fraternity.reimbursement.service
 
 import com.fraternity.reimbursement.dto.request.CreateReimbursementRequest
 import com.fraternity.reimbursement.dto.response.ReimbursementResponse
+import com.fraternity.reimbursement.model.ReceiptParse
 import com.fraternity.reimbursement.model.Reimbursement
 import com.fraternity.reimbursement.model.enums.ReimbursementStatus
+import com.fraternity.reimbursement.repository.ReceiptParseRepository
 import com.fraternity.reimbursement.repository.ReimbursementRepository
 import com.fraternity.reimbursement.repository.UserRepository
 import org.springframework.http.HttpStatus
@@ -15,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException
 @Service
 class ReimbursementService(
 	private val reimbursementRepository: ReimbursementRepository,
+	private val receiptParseRepository: ReceiptParseRepository,
 	private val userRepository: UserRepository,
 	private val storageService: StorageService
 ) {
@@ -46,6 +49,8 @@ class ReimbursementService(
 				receiptKey = receiptKey
 			)
 		)
+
+		receiptParseRepository.save(ReceiptParse(reimbursementId = reimbursement.id!!))
 
 		return ReimbursementResponse.from(reimbursement, storageService.generatePresignedUrl(receiptKey))
 	}
