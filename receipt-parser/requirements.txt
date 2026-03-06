@@ -1,0 +1,15 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+fastapi
+uvicorn
+torch
+torchvision
+transformers
+qwen-vl-utils
+Pillow
+requests
+python-multipart
+optimum[quanto]
+
+# GPU only (uncomment when running on GPU):
+# bitsandbytes
+# accelerate
