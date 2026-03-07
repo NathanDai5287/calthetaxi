@@ -73,17 +73,27 @@ def parse_image(image: Image.Image) -> float | None:
 	return json.loads(match.group(1)).get('parsed_amount')
 
 
-def process_job(conn, job_id, reimbursement_id):
+def connect():
+	return psycopg2.connect(os.environ['DATABASE_URL'])
+
+
+def process_job(job_id, reimbursement_id):
+	# Fetch receipt info then close before the long inference
+	conn = connect()
 	try:
 		with conn.cursor() as cur:
 			cur.execute("SELECT receipt_key, amount FROM reimbursements WHERE id = %s", (reimbursement_id,))
 			receipt_key, claimed_amount = cur.fetchone()
+	finally:
+		conn.close()
 
-		obj = s3.get_object(Bucket=BUCKET, Key=receipt_key)
-		image = Image.open(io.BytesIO(obj['Body'].read()))
+	obj = s3.get_object(Bucket=BUCKET, Key=receipt_key)
+	image = Image.open(io.BytesIO(obj['Body'].read()))
+	parsed_amount = parse_image(image)
 
-		parsed_amount = parse_image(image)
-
+	# Fresh connection to write results
+	conn = connect()
+	try:
 		if parsed_amount is None:
 			raise ValueError("Model did not return a parsed_amount")
 
@@ -106,43 +116,47 @@ def process_job(conn, job_id, reimbursement_id):
 		with conn.cursor() as cur:
 			cur.execute("UPDATE receipt_parses SET status = 'FAILED' WHERE id = %s", (job_id,))
 		conn.commit()
+	finally:
+		conn.close()
 
 
-def poll(conn) -> bool:
-	with conn.cursor() as cur:
-		cur.execute(
-			"""
-			UPDATE receipt_parses
-			SET status = 'PARSING'
-			WHERE id = (
-				SELECT id FROM receipt_parses
-				WHERE status = 'PENDING'
-				LIMIT 1
-				FOR UPDATE SKIP LOCKED
+def poll() -> bool:
+	conn = connect()
+	try:
+		with conn.cursor() as cur:
+			cur.execute(
+				"""
+				UPDATE receipt_parses
+				SET status = 'PARSING'
+				WHERE id = (
+					SELECT id FROM receipt_parses
+					WHERE status = 'PENDING'
+					LIMIT 1
+					FOR UPDATE SKIP LOCKED
+				)
+				RETURNING id, reimbursement_id
+				"""
 			)
-			RETURNING id, reimbursement_id
-			"""
-		)
-		row = cur.fetchone()
+			row = cur.fetchone()
+		conn.commit()
+	finally:
+		conn.close()
 
 	if not row:
-		conn.commit()
 		return False
 
-	conn.commit()
 	job_id, reimbursement_id = row
 	print(f"Claimed job {job_id} for reimbursement {reimbursement_id}")
-	process_job(conn, job_id, reimbursement_id)
+	process_job(job_id, reimbursement_id)
 	return True
 
 
 if __name__ == '__main__':
-	conn = psycopg2.connect(os.environ['DATABASE_URL'])
 	print("Worker started, polling every 30 seconds...")
 
 	while True:
 		try:
-			found = poll(conn)
+			found = poll()
 			if not found:
 				time.sleep(POLL_INTERVAL)
 		except Exception as e:
