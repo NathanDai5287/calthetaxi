@@ -1,64 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy: #0f1d2e;
-  --color-navy-light: #1e3a5f;
-  --color-navy-mid: #15293d;
-  --color-gold: #c49a3c;
-  --color-gold-light: #d4b36a;
-  --color-gold-dark: #9e7c30;
-  --color-cream: #faf7f2;
-  --color-stone: #ddd9d1;
-  --color-ink: #1a1a1a;
-  --color-ink-light: #555555;
-  --color-ink-faint: #999999;
-
-  --font-display: var(--font-cormorant);
-  --font-body: var(--font-libre-franklin);
-  --font-sans: var(--font-libre-franklin);
-
-  --animate-fade-up: fade-up 0.7s ease-out both;
-  --animate-fade-in: fade-in 0.6s ease-out both;
-  --animate-reveal: reveal 0.8s ease-out both;
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes reveal {
-  from {
-    transform: scaleX(0);
-  }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Nav link animated underline */
-.nav-link {
-  position: relative;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  height: 1px;
-  width: 0;
-  background: var(--color-gold);
-  transition: width 0.3s ease;
-}
-.nav-link:hover::after {
-  width: 100%;
+  --color-blue-primary: #1e3a5f;
+  --color-blue-light: #2c5282;
+  --color-blue-dark: #152a43;
+  --color-gold: #c5a44e;
+  --color-gold-light: #d4b96a;
+  --color-gold-dark: #a8893a;
+  --color-gray-light: #f1f3f5;
+  --color-gray-mid: #6b7280;
+  --color-gray-dark: #1f2937;
+  --font-sans: var(--font-geist-sans);
 }
