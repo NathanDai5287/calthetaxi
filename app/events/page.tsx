@@ -55,18 +55,18 @@ const events = [
   },
 ];
 
-function tagColor(tag: string): string {
+function tagStyle(tag: string): string {
   switch (tag) {
     case "Rush":
-      return "bg-gold/15 text-gold-dark";
+      return "text-gold-dark bg-gold/10";
     case "Philanthropy":
-      return "bg-blue-primary/10 text-blue-primary";
+      return "text-navy-light bg-navy-light/10";
     case "Social":
-      return "bg-purple-100 text-purple-700";
+      return "text-[#8b5e3c] bg-[#8b5e3c]/10";
     case "Alumni":
-      return "bg-green-100 text-green-700";
+      return "text-[#3c6e5e] bg-[#3c6e5e]/10";
     default:
-      return "bg-gray-100 text-gray-mid";
+      return "text-ink-faint bg-ink-faint/10";
   }
 }
 
@@ -74,45 +74,52 @@ export default function EventsPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-blue-primary px-6 py-20 text-center text-white">
-        <div className="mx-auto max-w-3xl">
-          <h1 className="mb-4 text-4xl font-bold">Upcoming Events</h1>
-          <p className="text-lg text-white/80">
-            See what&apos;s coming up at Theta Xi, Nu Chapter.
+      <section className="bg-navy px-6 py-24 sm:px-8">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-4 text-xs font-medium tracking-[0.3em] text-gold uppercase">
+            Calendar
+          </p>
+          <h1 className="font-display text-5xl font-semibold text-white sm:text-6xl">
+            Upcoming Events
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-white/40">
+            See what&apos;s coming up at Nu Chapter.
           </p>
         </div>
       </section>
 
       {/* Events List */}
-      <section className="px-6 py-20">
+      <section className="px-6 py-20 sm:px-8">
         <div className="mx-auto max-w-3xl">
-          <div className="space-y-4">
+          <div className="divide-y divide-stone">
             {events.map((event) => (
               <div
                 key={event.title}
-                className="flex gap-6 rounded border border-blue-primary/10 p-6"
+                className="grid gap-4 py-10 sm:grid-cols-[100px_1fr] sm:gap-8"
               >
-                <div className="w-16 shrink-0 text-center">
-                  <p className="text-lg font-bold text-blue-primary">
+                <div>
+                  <span className="font-display text-4xl font-bold text-navy">
                     {event.date.split(" ")[1]}
-                  </p>
-                  <p className="text-xs text-gray-mid uppercase">
+                  </span>
+                  <p className="mt-1 text-xs tracking-[0.15em] text-ink-faint uppercase">
                     {event.date.split(" ")[0]}
                   </p>
-                  <p className="mt-1 text-xs text-gray-mid">{event.day}</p>
                 </div>
-                <div className="flex-1">
-                  <div className="mb-1 flex items-center gap-2">
-                    <h3 className="font-semibold text-gray-dark">
+                <div>
+                  <div className="flex flex-wrap items-baseline gap-3">
+                    <h3 className="font-display text-xl font-semibold text-navy">
                       {event.title}
                     </h3>
                     <span
-                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${tagColor(event.tag)}`}
+                      className={`rounded-sm px-2 py-0.5 text-[10px] font-medium tracking-[0.1em] uppercase ${tagStyle(event.tag)}`}
                     >
                       {event.tag}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-mid">{event.description}</p>
+                  <p className="mt-2 text-sm text-ink-light leading-relaxed">
+                    {event.description}
+                  </p>
+                  <p className="mt-2 text-xs text-ink-faint">{event.day}</p>
                 </div>
               </div>
             ))}
@@ -121,17 +128,20 @@ export default function EventsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-gray-light px-6 py-16 text-center">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="mb-4 text-2xl font-bold text-blue-primary">
+      <section className="border-t border-stone px-6 py-20 sm:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 text-xs font-medium tracking-[0.3em] text-gold uppercase">
+            Venue
+          </p>
+          <h2 className="font-display text-3xl font-semibold text-navy">
             Want to host an event with us?
           </h2>
-          <p className="mb-6 text-gray-mid">
+          <p className="mx-auto mt-4 max-w-md text-sm text-ink-light">
             We partner with clubs and organizations for events at our house.
           </p>
           <a
             href="/host"
-            className="inline-block rounded bg-gold px-8 py-3 font-semibold text-white transition-colors hover:bg-gold-dark"
+            className="mt-8 inline-block border border-gold px-8 py-3 text-xs font-semibold tracking-[0.1em] text-gold uppercase transition-colors hover:bg-gold hover:text-white"
           >
             Learn More
           </a>

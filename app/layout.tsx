@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Cormorant_Garamond, Libre_Franklin } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const libreFranklin = Libre_Franklin({
+  variable: "--font-libre-franklin",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -16,81 +24,100 @@ export const metadata: Metadata = {
 
 function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b border-blue-primary/10 bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-xl font-bold text-blue-primary">
-          ΘΞ <span className="hidden font-normal text-gray-mid sm:inline">Nu Chapter</span>
+    <nav className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8">
+        <Link
+          href="/"
+          className="font-display text-2xl font-semibold tracking-wide text-navy"
+        >
+          &Theta;&Xi;
         </Link>
-        <div className="flex items-center gap-6 text-sm font-medium">
+        <div className="flex items-center gap-4 sm:gap-8">
           <Link
             href="/"
-            className="text-gray-dark transition-colors hover:text-blue-primary"
+            className="nav-link hidden text-xs font-medium tracking-[0.15em] text-ink uppercase md:block"
           >
             Home
           </Link>
           <Link
             href="/host"
-            className="text-gray-dark transition-colors hover:text-blue-primary"
+            className="nav-link text-xs font-medium tracking-[0.15em] text-ink uppercase"
           >
-            Host With Us
+            Host
           </Link>
           <Link
             href="/events"
-            className="text-gray-dark transition-colors hover:text-blue-primary"
+            className="nav-link text-xs font-medium tracking-[0.15em] text-ink uppercase"
           >
             Events
           </Link>
           <Link
             href="/#rush"
-            className="rounded bg-gold px-4 py-2 text-white transition-colors hover:bg-gold-dark"
+            className="border border-gold px-4 py-2 text-xs font-medium tracking-[0.15em] text-gold uppercase transition-colors hover:bg-gold hover:text-white"
           >
             Rush
           </Link>
         </div>
       </div>
+      <div className="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
     </nav>
   );
 }
 
 function Footer() {
   return (
-    <footer className="border-t border-blue-primary/10 bg-blue-dark text-white">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-8 sm:grid-cols-3">
+    <footer className="bg-navy text-white/60">
+      <div className="mx-auto max-w-6xl px-6 sm:px-8">
+        <div className="flex flex-col gap-10 py-16 sm:flex-row sm:justify-between">
           <div>
-            <h3 className="mb-2 text-lg font-bold">Theta Xi - Nu Chapter</h3>
-            <p className="text-sm text-white/70">
-              Brotherhood at UC Berkeley since 1910.
+            <p className="font-display text-3xl font-semibold text-white">
+              &Theta;&Xi;
             </p>
+            <p className="mt-2 text-sm">Nu Chapter &middot; UC Berkeley</p>
+            <p className="text-sm">Est. 1910</p>
           </div>
-          <div>
-            <h4 className="mb-2 font-semibold">Contact</h4>
-            <p className="text-sm text-white/70">contact@calthetaxi.org</p>
-            <p className="text-sm text-white/70">Berkeley, CA</p>
-          </div>
-          <div>
-            <h4 className="mb-2 font-semibold">Links</h4>
-            <div className="flex flex-col gap-1 text-sm text-white/70">
-              <Link href="/host" className="hover:text-gold-light">
-                Host With Us
-              </Link>
-              <Link href="/events" className="hover:text-gold-light">
-                Events
-              </Link>
-              <a
-                href="https://www.thetaxi.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gold-light"
-              >
-                National Theta Xi
-              </a>
+          <div className="flex gap-12 text-sm sm:gap-16">
+            <div>
+              <p className="mb-3 text-xs font-medium tracking-[0.15em] text-white/30 uppercase">
+                Navigate
+              </p>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/host"
+                  className="transition-colors hover:text-gold-light"
+                >
+                  Host With Us
+                </Link>
+                <Link
+                  href="/events"
+                  className="transition-colors hover:text-gold-light"
+                >
+                  Events
+                </Link>
+                <a
+                  href="https://www.thetaxi.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-gold-light"
+                >
+                  National Theta Xi
+                </a>
+              </div>
+            </div>
+            <div>
+              <p className="mb-3 text-xs font-medium tracking-[0.15em] text-white/30 uppercase">
+                Contact
+              </p>
+              <div className="flex flex-col gap-2">
+                <p>contact@calthetaxi.org</p>
+                <p>Berkeley, CA</p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-white/50">
-          Theta Xi Fraternity - Nu Chapter at the University of California,
-          Berkeley
+        <div className="border-t border-white/10 py-6 text-center text-xs text-white/30">
+          &copy; {new Date().getFullYear()} Theta Xi Fraternity &mdash; Nu
+          Chapter at the University of California, Berkeley
         </div>
       </div>
     </footer>
@@ -103,8 +130,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-white font-sans text-gray-dark">
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${libreFranklin.variable} h-full`}
+    >
+      <body className="flex min-h-full flex-col bg-cream antialiased text-ink">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
