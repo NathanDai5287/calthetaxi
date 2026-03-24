@@ -22,7 +22,7 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 px-6 text-center">
           <p
-            className="animate-fade-in mb-6 text-[10px] font-medium tracking-[0.35em] text-gold-light uppercase sm:text-xs"
+            className="animate-fade-in mb-6 text-[10px] font-medium tracking-[0.35em] text-gold uppercase sm:text-xs"
             style={{ animationDelay: "0.1s" }}
           >
             Theta Xi Fraternity &mdash; University of California, Berkeley
@@ -34,7 +34,7 @@ export default function Home() {
             Nu Chapter
           </h1>
           <p
-            className="animate-fade-in mt-2 text-xs tracking-[0.25em] text-white/30 uppercase sm:text-sm"
+            className="animate-fade-in mt-2 text-xs tracking-[0.25em] text-white/60 uppercase sm:text-sm"
             style={{ animationDelay: "0.5s" }}
           >
             Est. 1910
@@ -171,7 +171,7 @@ export default function Home() {
           <h2 className="font-display text-4xl font-semibold text-white sm:text-5xl">
             Interested in Rushing?
           </h2>
-          <p className="mx-auto mt-6 max-w-lg text-white/50 leading-relaxed">
+          <p className="mx-auto mt-6 max-w-lg text-white/70 leading-relaxed">
             Come meet the brothers and see what Theta Xi is all about. Rush
             events are open to all UC Berkeley students.
           </p>

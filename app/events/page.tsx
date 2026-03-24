@@ -82,7 +82,7 @@ export default function EventsPage() {
           <h1 className="font-display text-5xl font-semibold text-white sm:text-6xl">
             Upcoming Events
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/40">
+          <p className="mt-6 max-w-xl text-lg text-white/60">
             See what&apos;s coming up at Nu Chapter.
           </p>
         </div>

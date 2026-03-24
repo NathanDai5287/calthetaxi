@@ -78,7 +78,7 @@ function Footer() {
           </div>
           <div className="flex gap-12 text-sm sm:gap-16">
             <div>
-              <p className="mb-3 text-xs font-medium tracking-[0.15em] text-white/30 uppercase">
+              <p className="mb-3 text-xs font-medium tracking-[0.15em] text-white/50 uppercase">
                 Navigate
               </p>
               <div className="flex flex-col gap-2">
@@ -105,7 +105,7 @@ function Footer() {
               </div>
             </div>
             <div>
-              <p className="mb-3 text-xs font-medium tracking-[0.15em] text-white/30 uppercase">
+              <p className="mb-3 text-xs font-medium tracking-[0.15em] text-white/50 uppercase">
                 Contact
               </p>
               <div className="flex flex-col gap-2">
@@ -115,7 +115,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-white/10 py-6 text-center text-xs text-white/30">
+        <div className="border-t border-white/10 py-6 text-center text-xs text-white/50">
           &copy; {new Date().getFullYear()} Theta Xi Fraternity &mdash; Nu
           Chapter at the University of California, Berkeley
         </div>

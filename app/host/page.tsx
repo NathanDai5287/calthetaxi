@@ -18,7 +18,7 @@ export default function HostPage() {
           <h1 className="font-display text-5xl font-semibold text-white sm:text-6xl">
             Host With Us
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/40">
+          <p className="mt-6 max-w-xl text-lg text-white/60">
             Looking for a venue for your next event? The Theta Xi house is one
             of the best event spaces near UC Berkeley.
           </p>
@@ -125,7 +125,7 @@ export default function HostPage() {
           <h2 className="font-display text-4xl font-semibold text-white sm:text-5xl">
             Ready to Book?
           </h2>
-          <p className="mx-auto mt-6 max-w-lg text-white/50 leading-relaxed">
+          <p className="mx-auto mt-6 max-w-lg text-white/70 leading-relaxed">
             Reach out to discuss availability, pricing, and event details.
             We&apos;ll work with you to make your event happen.
           </p>
