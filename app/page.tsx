@@ -4,7 +4,10 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-blue-primary px-6 py-24 text-center text-white">
+      <section
+        className="bg-blue-primary px-6 py-24 text-center text-white"
+        style={{ backgroundColor: "#1e3a5f", color: "#ffffff" }}
+      >
         <div className="mx-auto max-w-3xl">
           <p className="mb-2 text-sm font-medium tracking-widest text-gold-light uppercase">
             Theta Xi Fraternity
