@@ -16,8 +16,8 @@ export default function Home() {
         <div className="pointer-events-none absolute left-1/3 top-0 h-full w-px -rotate-12 bg-gradient-to-b from-transparent via-gold/20 to-transparent" />
         <div className="pointer-events-none absolute right-1/4 top-0 h-full w-px rotate-6 bg-gradient-to-b from-transparent via-gold/10 to-transparent" />
 
-        {/* Radial depth */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,_rgba(30,58,95,0.5)_0%,_transparent_70%)]" />
+        {/* Subtle gold vignette */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_80%,_rgba(196,154,60,0.1)_0%,_transparent_50%)]" />
 
         {/* Content */}
         <div className="relative z-10 px-6 text-center">
