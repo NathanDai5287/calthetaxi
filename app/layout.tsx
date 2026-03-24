@@ -4,7 +4,6 @@ import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
@@ -16,33 +15,78 @@ export const metadata: Metadata = {
 
 function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b border-blue-primary/10 bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-xl font-bold text-blue-primary">
-          ΘΞ <span className="hidden font-normal text-gray-mid sm:inline">Nu Chapter</span>
+    <nav
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        borderBottom: "1px solid rgba(30,58,95,0.1)",
+        backgroundColor: "rgba(255,255,255,0.95)",
+        backdropFilter: "blur(4px)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1152,
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "16px 24px",
+        }}
+      >
+        <Link
+          href="/"
+          style={{ fontSize: 20, fontWeight: 700, color: "#1e3a5f" }}
+        >
+          &Theta;&Xi;{" "}
+          <span
+            className="sm-inline"
+            style={{ fontWeight: 400, color: "#6b7280" }}
+          >
+            Nu Chapter
+          </span>
         </Link>
-        <div className="flex items-center gap-6 text-sm font-medium">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 24,
+            fontSize: 14,
+            fontWeight: 500,
+          }}
+        >
           <Link
             href="/"
-            className="text-gray-dark transition-colors hover:text-blue-primary"
+            className="nav-link"
+            style={{ color: "#1f2937", transition: "color 0.15s" }}
           >
             Home
           </Link>
           <Link
             href="/host"
-            className="text-gray-dark transition-colors hover:text-blue-primary"
+            className="nav-link"
+            style={{ color: "#1f2937", transition: "color 0.15s" }}
           >
             Host With Us
           </Link>
           <Link
             href="/events"
-            className="text-gray-dark transition-colors hover:text-blue-primary"
+            className="nav-link"
+            style={{ color: "#1f2937", transition: "color 0.15s" }}
           >
             Events
           </Link>
           <Link
             href="/#rush"
-            className="rounded bg-gold px-4 py-2 text-white transition-colors hover:bg-gold-dark"
+            className="btn-gold"
+            style={{
+              borderRadius: 4,
+              backgroundColor: "#c5a44e",
+              padding: "8px 16px",
+              color: "#ffffff",
+              transition: "background-color 0.15s",
+            }}
           >
             Rush
           </Link>
@@ -54,41 +98,72 @@ function Navbar() {
 
 function Footer() {
   return (
-    <footer className="border-t border-blue-primary/10 bg-blue-dark text-white">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-8 sm:grid-cols-3">
+    <footer
+      style={{
+        borderTop: "1px solid rgba(30,58,95,0.1)",
+        backgroundColor: "#152a43",
+        color: "#ffffff",
+      }}
+    >
+      <div
+        style={{ maxWidth: 1152, margin: "0 auto", padding: "48px 24px" }}
+      >
+        <div className="footer-grid">
           <div>
-            <h3 className="mb-2 text-lg font-bold">Theta Xi - Nu Chapter</h3>
-            <p className="text-sm text-white/70">
+            <h3 style={{ marginBottom: 8, fontSize: 18, fontWeight: 700 }}>
+              Theta Xi - Nu Chapter
+            </h3>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)" }}>
               Brotherhood at UC Berkeley since 1910.
             </p>
           </div>
           <div>
-            <h4 className="mb-2 font-semibold">Contact</h4>
-            <p className="text-sm text-white/70">contact@calthetaxi.org</p>
-            <p className="text-sm text-white/70">Berkeley, CA</p>
+            <h4 style={{ marginBottom: 8, fontWeight: 600 }}>Contact</h4>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)" }}>
+              contact@calthetaxi.org
+            </p>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)" }}>
+              Berkeley, CA
+            </p>
           </div>
           <div>
-            <h4 className="mb-2 font-semibold">Links</h4>
-            <div className="flex flex-col gap-1 text-sm text-white/70">
-              <Link href="/host" className="hover:text-gold-light">
+            <h4 style={{ marginBottom: 8, fontWeight: 600 }}>Links</h4>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+                fontSize: 14,
+                color: "rgba(255,255,255,0.7)",
+              }}
+            >
+              <Link href="/host" className="footer-link">
                 Host With Us
               </Link>
-              <Link href="/events" className="hover:text-gold-light">
+              <Link href="/events" className="footer-link">
                 Events
               </Link>
               <a
                 href="https://www.thetaxi.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-gold-light"
+                className="footer-link"
               >
                 National Theta Xi
               </a>
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-white/50">
+        <div
+          style={{
+            marginTop: 32,
+            borderTop: "1px solid rgba(255,255,255,0.1)",
+            paddingTop: 24,
+            textAlign: "center",
+            fontSize: 12,
+            color: "rgba(255,255,255,0.5)",
+          }}
+        >
           Theta Xi Fraternity - Nu Chapter at the University of California,
           Berkeley
         </div>
@@ -103,10 +178,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-white font-sans text-gray-dark">
+    <html lang="en" style={{ height: "100%" }}>
+      <body
+        className={geistSans.className}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100%",
+          backgroundColor: "#ffffff",
+          color: "#1f2937",
+        }}
+      >
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </body>
     </html>
